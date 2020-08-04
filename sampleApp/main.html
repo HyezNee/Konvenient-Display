@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Example Web App</title>
+<style type="text/css">
+    body {
+        width: 100%;
+        height: 100%;
+        background-color:#354F52;
+    }
+    div {
+        position: absolute;
+        height:100%;
+        width:100%;
+        display: table;
+        margin-top: 50px;
+    }
+    h1 {
+        display: table-cell;
+        text-align: center;
+        color:#CAD2C5;
+    }
+    #human {
+        display: table-cell;
+        width: 30%;
+        height: 50%;
+        margin-top: 100px;
+        margin-left: 650px;
+    }
+    #mic_off {
+        width: 5%;
+        height: 10%;
+        margin-top: 700px;
+        margin-left: 800px;
+    }
+    #call_off {
+        width: 6%;
+        height: 13%;
+        margin-left: 70px;
+    }
+    #toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        padding: 15px 20px;
+        transform: translate(-50%, 10px);
+        border-radius: 30px;
+        overflow: hidden;
+        font-size: .8rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .5s, visibility .5s, transform .5s;
+        background: rgba(0, 0, 0, .35);
+        color: #fff;
+        z-index: 10000;
+    }
+    #toast.reveal {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0)
+}
+</style>
+<script type="text/javascript">
+window.onload = function() {
+    var bridge = new WebOSServiceBridge();
+
+    // 내가 만든 코드
+    // 토스트 메시지
+    let removeToast;
+
+    function toast(string) {
+        const toast = document.getElementById("toast");
+
+        toast.classList.contains("reveal") ?
+            (clearTimeout(removeToast), removeToast = setTimeout(function () {
+                document.getElementById("toast").classList.remove("reveal")
+            }, 1000)) :
+            removeToast = setTimeout(function () {
+                document.getElementById("toast").classList.remove("reveal")
+            }, 1000)
+        toast.classList.add("reveal"),
+            toast.innerText = string
+    }
+
+}
+</script>
+</head>
+<body>
+    <div id="time">
+        <h1>0 0 : 5 9</h1>
+    </div>
+    <div>
+        <img id="human" src="human.jpg" />
+    </div>
+    <div>
+        <img id="mic_off" src="mute-4595879_640.png" onclick="alert('음소거')"/>
+        <img id="call_off" src="callOff.jpg" onclick="alert('연결 끊기')" />
+    </div>
+</body>
+</html>

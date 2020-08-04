@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Example Web App</title>
+<style type="text/css">
+    body {
+        width: 100%;
+        height: 100%;
+        background-color:#354F52;
+    }
+    div {
+        position: absolute;
+        height:100%;
+        width:100%;
+        display: table;
+    }
+    h1 {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        color:#CAD2C5;
+    }
+    .loader10:before{
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: -100px;
+        height: 48px;
+        width: 48px;
+        border-radius: 48px;
+        -webkit-animation: loader10g 3s ease-in-out infinite;
+                animation: loader10g 3s ease-in-out infinite;
+    }
+    .loader10{
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        top: 600px;
+        left: 48%;
+        border-radius: 48px;
+        -webkit-animation: loader10m 3s ease-in-out infinite;
+                animation: loader10m 3s ease-in-out infinite;
+    }
+    .loader10:after{
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: 100px;
+        height: 48px;
+        width: 48px;
+        border-radius: 48px;
+        -webkit-animation: loader10d 3s ease-in-out infinite;
+                animation: loader10d 3s ease-in-out infinite;
+    }
+    @-webkit-keyframes loader10g{
+        0%{background-color: rgba(255, 255, 255, .2);}
+        25%{background-color: rgba(255, 255, 255, 1);}
+        50%{background-color: rgba(255, 255, 255, .2);}
+        75%{background-color: rgba(255, 255, 255, .2);}
+        100%{background-color: rgba(255, 255, 255, .2);}
+    }
+    @keyframes loader10g{
+        0%{background-color: rgba(255, 255, 255, .2);}
+        25%{background-color: rgba(255, 255, 255, 1);}
+        50%{background-color: rgba(255, 255, 255, .2);}
+        75%{background-color: rgba(255, 255, 255, .2);}
+        100%{background-color: rgba(255, 255, 255, .2);}
+    }
+    @-webkit-keyframes loader10m{
+        0%{background-color: rgba(255, 255, 255, .2);}
+        25%{background-color: rgba(255, 255, 255, .2);}
+        50%{background-color: rgba(255, 255, 255, 1);}
+        75%{background-color: rgba(255, 255, 255, .2);}
+        100%{background-color: rgba(255, 255, 255, .2);}
+    }
+    @keyframes loader10m{
+        0%{background-color: rgba(255, 255, 255, .2);}
+        25%{background-color: rgba(255, 255, 255, .2);}
+        50%{background-color: rgba(255, 255, 255, 1);}
+        75%{background-color: rgba(255, 255, 255, .2);}
+        100%{background-color: rgba(255, 255, 255, .2);}
+    }
+    @-webkit-keyframes loader10d{
+        0%{background-color: rgba(255, 255, 255, .2);}
+        25%{background-color: rgba(255, 255, 255, .2);}
+        50%{background-color: rgba(255, 255, 255, .2);}
+        75%{background-color: rgba(255, 255, 255, 1);}
+        100%{background-color: rgba(255, 255, 255, .2);}
+    }
+    @keyframes loader10d{
+        0%{background-color: rgba(255, 255, 255, .2);}
+        25%{background-color: rgba(255, 255, 255, .2);}
+        50%{background-color: rgba(255, 255, 255, .2);}
+        75%{background-color: rgba(255, 255, 255, 1);}
+        100%{background-color: rgba(255, 255, 255, .2);}
+    }
+    #toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        padding: 15px 20px;
+        transform: translate(-50%, 10px);
+        border-radius: 30px;
+        overflow: hidden;
+        font-size: .8rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .5s, visibility .5s, transform .5s;
+        background: rgba(0, 0, 0, .35);
+        color: #fff;
+        z-index: 10000;
+    }
+    #toast.reveal {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0)
+}
+</style>
+<script type="text/javascript">
+window.onload = function() {
+    //var bridge = new WebOSServiceBridge();
+    /*
+     *  getTimeApi calls gettime of systemservice, a module in the platform.
+     */
+    /*var getTimeApi = 'luna://com.webos.service.systemservice/clock/getTime';
+    var getTimeParams = '{}';*/
+
+    /*
+     *  helloApi calls the hello method of js_service template provided by CLI.
+     *  In this case, the service name is used as default name "com.domain.app.service" is.
+     *  If you change this service name, you need to change the service name of the following API.
+     *
+     *  If you change the name to helloparmas as you want, the contents will be reflected ond the screen.
+     */
+     // 임의로 만들어낸 api
+    /*var helloApi = 'luna://com.domain.app.service/hello';
+    var helloParams = '{"name":"webOS"}';
+
+    function getTime_callback(msg){
+        var arg = JSON.parse(msg);
+        if (arg.returnValue) {
+            console.log("[APP_NAME: example web app] GETTIME_SUCCESS UTC : " + arg.utc);
+            //webOSSystem.PmLogString(6, "GETTIME_SUCCESS", '{"APP_NAME": "example web app"}', "UTC : " + arg.utc);
+        }
+        else {
+            console.error("[APP_NAME: example web app] GETTIME_FAILED errorText : " + arg.errorText);
+            //webOSSystem.PmLogString(3, "GETTIME_FAILED", '{"APP_NAME": "example web app"}', "errorText : " + arg.errorText);
+        }
+    }
+
+    function hello_callback(msg){
+        var arg = JSON.parse(msg);
+        if (arg.returnValue) {
+            document.getElementById("txt_msg").innerHTML = arg.Response;
+            console.log("[APP_NAME: example web app] CALLHELLO_SUCCESS response : " + arg.Response);
+            //webOSSystem.PmLogString(6, "CALLHELLO_SUCCESS", '{"APP_NAME": "example web app"}', "response : " + arg.Response);
+        }
+        else {
+            console.error("[APP_NAME: example web app] CALLHELLO_FAILED errorText : " + arg.errorText);
+            //webOSSystem.PmLogString(3, "CALLHELLO_FAILED", '{"APP_NAME": "example web app"}', "errorText : " + arg.errorText);
+        }
+    }
+
+    bridge.onservicecallback = getTime_callback;
+    bridge.call(getTimeApi, getTimeParams);*/
+    // 클릭 이벤트
+    /*document.getElementById("txt_msg").onclick = function() {
+        bridge.onservicecallback = hello_callback;
+        bridge.call(helloApi, helloParams);
+    };*/
+
+    // 내가 만든 코드
+    // 토스트 메시지
+    let removeToast;
+
+    function toast(string) {
+        const toast = document.getElementById("toast");
+
+        toast.classList.contains("reveal") ?
+            (clearTimeout(removeToast), removeToast = setTimeout(function () {
+                document.getElementById("toast").classList.remove("reveal")
+            }, 1000)) :
+            removeToast = setTimeout(function () {
+                document.getElementById("toast").classList.remove("reveal")
+            }, 1000)
+        toast.classList.add("reveal"),
+            toast.innerText = string
+    }
+
+}
+</script>
+</head>
+<body>
+    <div>
+        <!--<h1 id="txt_msg">Hello, Web Application!!</h1>-->
+        <!-- 운전자가 걸게 할 것인가, 뒷좌석이 걸게 할 것인가? -->
+        <h1 id="call_msg">운전자와 실시간 상호작용을 시도합니다.</h1>
+    </div>
+    <div class="loader10"></div>
+    <div>   <!-- div로 감싸주어야 이벤트 정상적으로 발생함 -->
+        <input type="button" value="다음 화면으로 넘어가기(임시)" id="btn" onclick="location.href='main.html'" />
+    </div>
+</body>
+</html>
