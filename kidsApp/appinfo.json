@@ -1,0 +1,14 @@
+{
+  "id": "com.domain.app.kids",
+  "version": "1.0.0",
+  "vendor": "My Company",
+  "type": "web",
+  "main": "index.html",
+  "title": "Kids Filter",
+  "icon": "icon.png",
+  "requiredPermissions": [
+    "time",
+    "settings.read",
+    "activities.manage"
+  ]
+}
