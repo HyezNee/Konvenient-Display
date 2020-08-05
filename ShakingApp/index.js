@@ -1,5 +1,5 @@
 window.onload = function() {
-    //var bridge = new WebOSServiceBridge();
+    var bridge = new WebOSServiceBridge();
     /*
      *  getTimeApi calls gettime of systemservice, a module in the platform.
      */
@@ -41,14 +41,14 @@ window.onload = function() {
         }
     }
 
-    /*
+    
     bridge.onservicecallback = getTime_callback;
     bridge.call(getTimeApi, getTimeParams);
     document.getElementById("txt_msg").onclick = function() {
         bridge.onservicecallback = hello_callback;
         bridge.call(helloApi, helloParams);
     };
-    */
+    
 }
 $(document).ready(function(){
     //멀미 필터 키고 끄기
