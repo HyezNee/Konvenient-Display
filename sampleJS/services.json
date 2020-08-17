@@ -1,0 +1,9 @@
+{
+  "id": "com.konduck.app.samplejs",
+  "description": "HelloWorld Service",
+  "services": [
+    {
+      "name": "com.konduck.app.samplejs"
+    }
+  ]
+}
