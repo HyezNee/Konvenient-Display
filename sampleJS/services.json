@@ -3,7 +3,7 @@
   "description": "HelloWorld Service",
   "services": [
     {
-      "name": "com.konduck.app.samplejs"
+      "name": "com.konduck.app.samplejs.service"
     }
   ]
 }

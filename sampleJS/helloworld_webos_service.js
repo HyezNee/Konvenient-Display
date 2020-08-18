@@ -1,7 +1,9 @@
 // helloworld_webos_service.js
 // is simple service, based on low-level luna-bus API
+//서비스이름은 appid.service 형태여야 정상 동작한다고 해서 수정함.
 
 var pkgInfo = require('./package.json');
+//시스템버스 인터페이스 제공
 var Service = require('webos-service');
 var pmloglib = require('pmloglib'); // For use pmlog, pmlog is wirted /var/log/messages
 
