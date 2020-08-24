@@ -2,7 +2,7 @@
   "name": "sampleapp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "webrtc.js",
   "scripts": {
     "test": "communication between passengers"
   },
@@ -14,5 +14,8 @@
     "video"
   ],
   "author": "KonduckandChildren",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "simple-peer": "^9.7.2"
+  }
 }
