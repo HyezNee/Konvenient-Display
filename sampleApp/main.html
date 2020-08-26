@@ -2,78 +2,12 @@
 <html>
 <head>
 <title>Example Web App</title>
-<style type="text/css">
-    * {
-    margin: 0;
-    padding: 0;
-}
-    body {
-        width: 90%;
-        margin: 0 auto;
-        height: 100%;
-        background-color:#354F52;
-    }
-    div {
-        /*position: absolute;*/
-        height:100%;
-        width:100%;
-        /*display: table;*/
-        margin-top: 50px;
-    }
-    /*h1 {
-        display: table-cell;
-        text-align: center;
-        color:#CAD2C5;
-    }*/
-    #human {
-        display: table-cell;
-        width: 30%;
-        height: 50%;
-        margin-top: 100px;
-        margin-left: 650px;
-    }
-    #mic_off {
-        width: 5%;
-        height: 10%;
-        margin-top: 70px;
-        margin-left: 80px;
-    }
-    #call_off {
-        width: 6%;
-        height: 13%;
-        margin-left: 70px;
-    }
-    #toast {
-        position: fixed;
-        bottom: 30px;
-        left: 50%;
-        padding: 15px 20px;
-        transform: translate(-50%, 10px);
-        border-radius: 30px;
-        overflow: hidden;
-        font-size: .8rem;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity .5s, visibility .5s, transform .5s;
-        background: rgba(0, 0, 0, .35);
-        color: #fff;
-        z-index: 10000;
-    }
-    #toast.reveal {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, 0)
-
-
-    }
-
-     .videoView {
-        border: 2px solid black;
-    }
-</style>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="index.css">
 <script type="text/javascript">
+
 window.onload = function() {
-    var bridge = new WebOSServiceBridge();
+    //var bridge = new WebOSServiceBridge();
 
     // 내가 만든 코드
     // 토스트 메시지
@@ -95,23 +29,29 @@ window.onload = function() {
 
 }
 </script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-    <script src="./webrtc.js"></script>
 </head>
 <body>
     <div id="time">
         <h1>0 0 : 5 9</h1>
     </div>
-    <div>
-        <h3>내 화면</h3>
-        <video id="localVideo" class="videoView" autoplay="480px"></video>
-        <h3>상대 화면</h3>
-        <video id="remoteVideo" class="videoView" width="480px" autoplay></video>
+    <div id="videos">
+        <h3>-내 화면-</h3>
+        <video id="localVideo" class="videoView" autoplay muted playsinline></video>
+        <h3>-상대 화면-</h3>
+        <video id="remoteVideo" class="videoView"autoplay playsinline></video>
     </div>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="webrtc.js"></script>
+
     <div>
-        <img id="mic_off" src="mute-4595879_640.png" onclick="alert('음소거')"/>
-        <img id="call_off" src="callOff.jpg" onclick="alert('연결 끊기')" />
+        <img id="mic_off" src="resource/mute-4595879_640.png" onclick="alert('음소거')"/>
+        <img id="call_off" src="resource/callOff.jpg" onclick="alert('연결 끊기')" />
     </div>
+
+
+
 </body>
 </html>
