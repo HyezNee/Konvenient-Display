@@ -95,80 +95,9 @@
         75%{background-color: rgba(255, 255, 255, 1);}
         100%{background-color: rgba(255, 255, 255, .2);}
     }
-    #toast {
-        position: fixed;
-        bottom: 30px;
-        left: 50%;
-        padding: 15px 20px;
-        transform: translate(-50%, 10px);
-        border-radius: 30px;
-        overflow: hidden;
-        font-size: .8rem;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity .5s, visibility .5s, transform .5s;
-        background: rgba(0, 0, 0, .35);
-        color: #fff;
-        z-index: 10000;
-    }
-    #toast.reveal {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, 0)
-    }
-    #btnDiv {
-        position: fixed;
-        left: 300px;
-    }
 </style>
-<script type="text/javascript">
- 
-window.onload = function() {
-    var bridge = new WebOSServiceBridge();
-    /*
-     *  getTimeApi calls gettime of systemservice, a module in the platform.
-     */
-    var getTimeApi = 'luna://com.webos.service.systemservice/clock/getTime';
-    var getTimeParams = '{}';
-    var getBackApi = 'luna://com.webos.service.applicationmanager/close';
-    var getBackParams = '{"id":"com.sample.app"}';
+<script type="text/javascript"></script>
 
-
-
-
-    bridge.onservicecallback = getTime_callback;
-    bridge.call(getTimeApi, getTimeParams);
-    // 클릭 이벤트
-    document.getElementById("txt_msg").onclick = function() {
-        bridge.onservicecallback = hello_callback;
-        bridge.call(helloApi, helloParams);
-    };
-    document.getElementById("btn2").onclick = function() {
-        bridge.onservicecallback = back_callback;
-        bridge.call(getBackApi, getBackParams);
-    }
-
-    // 내가 만든 코드
-    // 토스트 메시지
-    let removeToast;
-
-    function toast(string) {
-        const toast = document.getElementById("toast");
-
-        toast.classList.contains("reveal") ?
-            (clearTimeout(removeToast), removeToast = setTimeout(function () {
-                document.getElementById("toast").classList.remove("reveal")
-            }, 1000)) :
-            removeToast = setTimeout(function () {
-                document.getElementById("toast").classList.remove("reveal")
-            }, 1000)
-        toast.classList.add("reveal"),
-            toast.innerText = string
-    }
-
-}
-
-</script>
 </head>
 <body>
     <div>
@@ -179,9 +108,6 @@ window.onload = function() {
     <div class="loader10"></div>
     <div>   <!-- div로 감싸주어야 이벤트 정상적으로 발생함 -->
         <input type="button" value="통화 시작하기" id="btn" onclick="location.href='main.html'" />
-    </div>
-    <div id="btnDiv">
-        <input type="button" value="종료" id="btn2" />
     </div>
 </body>
 </html>
