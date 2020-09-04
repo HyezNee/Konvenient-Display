@@ -3,7 +3,8 @@
 <head>
 <title>Example Web App</title>
 <meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="index.css">
+<!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<link rel="stylesheet" type="text/css" href="main.css">
 <script type="text/javascript">
 
 window.onload = function() {
@@ -32,7 +33,8 @@ window.onload = function() {
 </head>
 <body>
     <div id="time">
-        <h1>0 0 : 5 9</h1>
+        <h1>room ID : </h1>
+        <div id="room_id"></div>
     </div>
     <div id="videos">
         <h3>-내 화면-</h3>
@@ -41,11 +43,9 @@ window.onload = function() {
         <video id="remoteVideo" class="videoView"autoplay playsinline></video>
     </div>
 
-
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script src="webrtc.js"></script>
-
     <div>
         <img id="mic_off" src="resource/mute-4595879_640.png" onclick="alert('음소거')"/>
         <img id="call_off" src="resource/callOff.jpg" onclick="alert('연결 끊기')" />

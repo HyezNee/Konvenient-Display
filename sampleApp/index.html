@@ -10,13 +10,10 @@
         background-color:#354F52;
     }
     div {
-        position: absolute;
         height:100%;
         width:100%;
-        display: table;
     }
     h1 {
-        display: table-cell;
         vertical-align: middle;
         text-align: center;
         color:#CAD2C5;
@@ -116,10 +113,10 @@
     visibility: visible;
     transform: translate(-50%, 0)
     }
-    #btnDiv {
+   /* #btnDiv {
         position: fixed;
         left: 300px;
-    }
+    }*/
 </style>
 <script type="text/javascript">
  
@@ -174,14 +171,23 @@ window.onload = function() {
     <div>
         <!--<h1 id="txt_msg">Hello, Web Application!!</h1>-->
         <!-- 운전자가 걸게 할 것인가, 뒷좌석이 걸게 할 것인가? -->
-        <h1 id="call_msg">운전자와 실시간 상호작용을 시도합니다.</h1>
+        <h1 id="call_msg">탑승자와 실시간 상호작용을 시작합니다.</h1>
     </div>
-    <div class="loader10"></div>
-    <div>   <!-- div로 감싸주어야 이벤트 정상적으로 발생함 -->
-        <input type="button" value="통화 시작하기" id="btn" onclick="location.href='main.html'" />
+    <div>
+        <h3>새로운 방 생성하기</h3> <!-- div로 감싸주어야 이벤트 정상적으로 발생함 -->
+        <input type="button" value="생성" id="btn" onclick="location.href='main.html'" />
     </div>
-    <div id="btnDiv">
+    <div>
+        <h3>기존 방 입장하기</h3> <!-- div로 감싸주어야 이벤트 정상적으로 발생함 -->
+        <input type="text" size="7" />
+        <input type="button" value="생성" id="btn" onclick="location.href='main.html'" />
+    </div>
+    <div>
+        <h3>앱 종료하기</h3>
         <input type="button" value="종료" id="btn2" />
     </div>
+
+    <div class="loader10"></div>
+    
 </body>
 </html>

@@ -8,6 +8,7 @@ var pc;
 var remoteStream;
 var turnReady;
 
+
 var pcConfig = {
   'iceServers': [{
     'urls': 'stun:stun.l.google.com:19302'
@@ -23,8 +24,11 @@ var sdpConstraints = {
 /////////////////////////////////////////////
 
 var room = 'foo';
+
 // Could prompt for room name:
 //room = prompt('Enter room name:');
+
+
 
 var socket = io.connect();
 
@@ -141,6 +145,16 @@ function maybeStart() {
 window.onbeforeunload = function() {
   sendMessage('bye');
 };
+
+
+
+
+window.onload = function(){
+  //alert("외않되!!");
+  var roomID = document.getElementById("room_id");
+  roomID.innerHTML = room;
+};
+
 
 /////////////////////////////////////////////////////////
 
