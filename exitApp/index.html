@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Example Web App</title>
+<style type="text/css">
+    body {
+        width: 100%;
+        height: 100%;
+        background-color:#202020;
+    }
+    div {
+        position:absolute;
+        height:100%;
+        width:100%;
+        display: table;
+    }
+    h1 {
+        display: table-cell;
+        vertical-align: middle;
+        text-align:center;
+        color:#FFFFFF;
+    }
+</style>
+<script type="text/javascript">
+window.onload = function() {
+    var bridge = new WebOSServiceBridge();
+
+    var getBackApi = 'luna://com.webos.service.applicationmanager/launch';
+    var getBackParams = '{"id":"bareapp"}';
+
+    function exit_callback(msg){
+        var arg = JSON.parse(msg);
+        if (arg.returnValue) {
+            console.log("EXIT_SUCCESS response : " + arg.returnValue);
+            //webOSSystem.PmLogString(6, "CALLHELLO_SUCCESS", '{"APP_NAME": "example web app"}', "response : " + arg.Response);
+        }
+        else {
+            console.error("EXIT_SUCCESS_FAILED errorText : " + arg.errorText);
+            //webOSSystem.PmLogString(3, "CALLHELLO_FAILED", '{"APP_NAME": "example web app"}', "errorText : " + arg.errorText);
+        }
+    }
+
+    document.getElementById("btn2").onclick = function() {
+        bridge.onservicecallback = exit_callback;
+        bridge.call(getBackApi, getBackParams);
+        console.log("종료");
+    }
+}
+</script>
+</head>
+<body>
+    <div id="btnDiv">
+        <input type="button" value="종료" id="btn2" />
+    </div>
+</body>
+</html>

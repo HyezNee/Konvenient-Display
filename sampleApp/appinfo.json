@@ -9,6 +9,8 @@
   "requiredPermissions": [
     "time",
     "settings.read",
-    "activities.manage"
+    "activities.manage",
+    "applications.launch",
+    "applications.internal"
   ]
 }
