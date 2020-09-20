@@ -9,9 +9,14 @@ var remoteStream;
 var turnReady;
 
 
-var pcConfig = {
+/*var pcConfig = {
   'iceServers': [{
     'urls': 'stun:stun.l.google.com:19302'
+  }]
+};*/
+var pcConfig = {
+  'iceServers': [{
+    'urls': 'turn:konduckcommun.com:3478'
   }]
 };
 
@@ -269,3 +274,4 @@ function stop() {
   pc.close();
   pc = null;
 }
+
