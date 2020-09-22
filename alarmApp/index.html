@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>alarm</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="index.css" />
+    <script src="index.js"></script>
+</head>
+<body>
+    <header>
+        <h1 id="title">사용 시간 설정</h1>
+    </header>
+    <div class="container">
+        <span class="comment">지금까지 사용한 시간</span><br>
+        <span class="comment" id="used_time"></span>
+    </div>
+    <div class="container" id="alarm_off">
+        <span class="comment">앞으로 사용할 시간 입력 (분 단위, 양의 정수만)</span><br>
+        <input type="text" placeholder="입력하세요" id="time_to_use" pattern="[0-9]+">
+        <button id="start_alarm">자동 종료 시작</button>
+    </div>
+    <div class="container" id="alarm_on">
+        <span class="comment" id="off_time"></span>
+        <span class="comment">에 종료 예정</span>
+    </div>
+</body>
+</html>
