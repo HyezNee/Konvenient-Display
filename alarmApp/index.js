@@ -65,6 +65,7 @@ window.onload = function() {
         bridge2.onservicecallback = alarm_callback;
         bridge2.call(alarmApi, alarmParams);
     };
+
 }
 
 $(document).ready(function(){
@@ -73,7 +74,9 @@ $(document).ready(function(){
     $("#start_alarm").click(function(){
         var input = $("#time_to_use").val().trim();
         var result = /^\d*$/.test(input);
-        if(input != '' & result)
+        if(input != '' & result) {
             $("#alarm_on").css("display", "block");
+            $("#start_alarm").attr('disabled', true);
+        }
     });
 });
