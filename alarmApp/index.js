@@ -1,24 +1,45 @@
 window.onload = function() {
     var bridge = new WebOSServiceBridge();
+    var bridge2 = new WebOSServiceBridge();
     /*
-     *  getTimeApi calls gettime of systemservice, a module in the platform.
-     */
+    *  getTimeApi calls gettime of systemservice, a module in the platform.
+    */
     var getTimeApi = 'luna://com.webos.service.systemservice/clock/getTime';
     var getTimeParams = '{}';
 
     /*
-     *  helloApi calls the hello method of js_service template provided by CLI.
-     *  In this case, the service name is used as default name "com.domain.app.service" is.
-     *  If you change this service name, you need to change the service name of the following API.
-     *
-     *  If you change the name to helloparmas as you want, the contents will be reflected on the screen.
-     */
-    var helloApi = 'luna://com.domain.app.service/hello';
-    var helloParams = '{"name":"webOS"}';
+    *  helloApi calls the hello method of js_service template provided by CLI.
+    *  In this case, the service name is used as default name "com.domain.app.service" is.
+    *  If you change this service name, you need to change the service name of the following API.
+    *
+    *  If you change the name to helloparmas as you want, the contents will be reflected on the screen.
+    */
+    var interval = document.getElementById("time_to_use").value;
+    var hour = interval / 60;
+    if(hour < 10) {
+        hour = "0" + hour;
+    }
+    var min = interval % 60;
+    if(min < 10) {
+        min = "0" + min;
+    }
+    var alarmApi = 'luna://com.webos.service.alarm/set';
+    var alarmParams = '{ "key":"kids",\
+                        "uri":"luna://com.webos.service.power/shutdown/machineOff",\
+                        "params":{\"reason\":\"localKey\"},\
+                        "in":"00:00:10",\
+                        "wakeup":true }';
+    // 기능 동작 안됨. 왜?ㅜㅜ
+    //":"' + hour + ':' + min + ':00",\
 
     function getTime_callback(msg){
         var arg = JSON.parse(msg);
         if (arg.returnValue) {
+            var utcDate = arg.utc + document.getElementById("time_to_use").value * 60;
+            console.log(arg.utc + " / " + utcDate);
+            var date = new Date(utcDate * 1000);
+            var month = date.getMonth() + 1
+            document.getElementById("off_time").innerHTML = month + '월 ' + date.getDate() + '일 ' + date.getHours() + ' : ' + date.getMinutes();
             console.log("[APP_NAME: example web app] GETTIME_SUCCESS UTC : " + arg.utc);
             //webOSSystem.PmLogString(6, "GETTIME_SUCCESS", '{"APP_NAME": "example web app"}', "UTC : " + arg.utc);
         }
@@ -28,26 +49,24 @@ window.onload = function() {
         }
     }
 
-    function hello_callback(msg){
+    function alarm_callback(msg){
         var arg = JSON.parse(msg);
         if (arg.returnValue) {
-            document.getElementById("title").innerHTML = arg.Response;
-            console.log("[APP_NAME: example web app] CALLHELLO_SUCCESS response : " + arg.Response);
-            //webOSSystem.PmLogString(6, "CALLHELLO_SUCCESS", '{"APP_NAME": "example web app"}', "response : " + arg.Response);
+            console.log("[APP_NAME: alarm app] CALLALARM_SUCCESS key : " + arg.key + ", response : " + arg.returnValue);
         }
         else {
-            console.error("[APP_NAME: example web app] CALLHELLO_FAILED errorText : " + arg.errorText);
-            //webOSSystem.PmLogString(3, "CALLHELLO_FAILED", '{"APP_NAME": "example web app"}', "errorText : " + arg.errorText);
+            console.error("[APP_NAME: alarm app] CALLALARM_FAILED errorText : " + arg.errorText);
         }
     }
 
-    bridge.onservicecallback = getTime_callback;
-    bridge.call(getTimeApi, getTimeParams);
-    document.getElementById("title").onclick = function() {
-        bridge.onservicecallback = hello_callback;
-        bridge.call(helloApi, helloParams);
+    document.getElementById("start_alarm").onclick = function() {
+        bridge.onservicecallback = getTime_callback;
+        bridge.call(getTimeApi, getTimeParams);
+        bridge2.onservicecallback = alarm_callback;
+        bridge2.call(alarmApi, alarmParams);
     };
 }
+
 $(document).ready(function(){
 
     //시작 button click

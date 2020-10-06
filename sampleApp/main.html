@@ -8,26 +8,6 @@
 <script type="text/javascript">
 
 window.onload = function() {
-    //var bridge = new WebOSServiceBridge();
-
-    // 내가 만든 코드
-    // 토스트 메시지
-    let removeToast;
-
-    function toast(string) {
-        const toast = document.getElementById("toast");
-
-        toast.classList.contains("reveal") ?
-            (clearTimeout(removeToast), removeToast = setTimeout(function () {
-                document.getElementById("toast").classList.remove("reveal")
-            }, 1000)) :
-            removeToast = setTimeout(function () {
-                document.getElementById("toast").classList.remove("reveal")
-            }, 1000)
-        toast.classList.add("reveal"),
-            toast.innerText = string
-    }
-
     // Luna Bus API 함수
     var bridge = new WebOSServiceBridge();
 
@@ -51,7 +31,6 @@ window.onload = function() {
         bridge.call(getBackApi, getBackParams);
         console.log("종료");
     }
-
 }
 </script>
 </head>

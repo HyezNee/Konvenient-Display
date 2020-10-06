@@ -1,0 +1,9 @@
+{
+  "id": "com.mypoweroff.app.service",
+  "description": "HelloWorld Service",
+  "services": [
+    {
+      "name": "com.mypoweroff.app.service"
+    }
+  ]
+}
