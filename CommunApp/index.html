@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Example Web App</title>
+<meta charset="utf-8">
 <style type="text/css">
     body {
         width: 100%;
@@ -22,6 +23,34 @@
     }
 </style>
 <script type="text/javascript">
+
+    window.onload = function() {
+        // Luna Bus API 함수
+        var bridge = new WebOSServiceBridge();
+    
+        var getBackApi = 'luna://com.webos.service.applicationmanager/launch';
+        var getBackParams = '{"id":"bareapp"}';
+    
+        function exit_callback(msg){
+            var arg = JSON.parse(msg);
+            if (arg.returnValue) {
+                console.log("EXIT_SUCCESS response : " + arg.returnValue);
+                //webOSSystem.PmLogString(6, "CALLHELLO_SUCCESS", '{"APP_NAME": "example web app"}', "response : " + arg.Response);
+            }
+            else {
+                console.error("EXIT_SUCCESS_FAILED errorText : " + arg.errorText);
+                //webOSSystem.PmLogString(3, "CALLHELLO_FAILED", '{"APP_NAME": "example web app"}', "errorText : " + arg.errorText);
+            }
+        }
+    
+        document.getElementById("call_off").onclick = function() {
+            bridge.onservicecallback = exit_callback;
+            bridge.call(getBackApi, getBackParams);
+            console.log("종료");
+        }
+    }
+    </script>
+<script type="text/javascript">
 window.onload = function() {
     var maxwindow = window.open("https://59.13.228.230:3000", "", "resize=1,scrollbars=1,status=1");
     maxwindow.moveTo(0, 0);
@@ -31,7 +60,7 @@ window.onload = function() {
 </head>
 <body>
     <div>
-        <h1 id="txt_msg">Hello, Web Application!!</h1>
+        <input type="button" value="종료" id="btn2" onclick="exit_callback"/>
     </div>
 </body>
 </html>

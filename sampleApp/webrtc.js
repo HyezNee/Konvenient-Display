@@ -30,8 +30,8 @@ var sdpConstraints = {
 
 var room = 'foo';
 
-// Could prompt for room name:
-//room = prompt('Enter room name:');
+ //Could prompt for room name:
+room = prompt('Enter room name:');
 
 
 
